@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "卷积神经网络"
-date:   2019-08-1
+title:  "convolution-nn"
+date:   2019-08-01
 excerpt: "MathJax Example for Moon Jekyll Theme."
 tag:
 - markdown 
