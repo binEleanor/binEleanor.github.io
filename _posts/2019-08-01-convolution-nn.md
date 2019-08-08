@@ -1,20 +1,20 @@
 ---
 layout: post
-title:  "convolution-nn"
+title:  "CNN/RNN/LSTM/GRU/Seq2Seq"
 date:   2019-08-01
-excerpt: "MathJax Example for Moon Jekyll Theme."
+excerpt: "基本神经网络架构的小结"
 tag:
-- markdown 
-- mathjax
-- example
-- test
-- jekyll
+- CNN 
+- RNN
+- LSTM
+- GRU
+- Seq2Seq
 comments: true
 ---
 
-### 卷积神经网络
+### 1.卷积神经网络
 
-https://blog.csdn.net/wangyangzhizhou/article/details/76034219
+详细解释可参考博客：https://blog.csdn.net/wangyangzhizhou/article/details/76034219
 
 ```mermaid
 graph LR
@@ -25,17 +25,28 @@ graph LR
     E -.yes.-> F(全连接层网络)
     E -.no.-> G
     F --> G(模型输出)
-
 ```
+{% highlight mermaid %}
+graph LR
+    A(模型输入)--卷积操作---B(卷积输出features)
+    B --卷积操作--- C(卷积输出features)
+    C --多层卷积--- D(卷积输出features)
+    D --池化操作--- E(池化层输出)
+    E -.yes.-> F(全连接层网络)
+    E -.no.-> G
+    F --> G(模型输出)
+{% endhighlight %}
 
-1. 卷积层的作用是对输入数据进行特征提取，在实际的卷积特征过程中，可以设置多个filter size提取不同尺度的信息，如对文本而言，如果将filter size 设置成[2, 3, 4]，在某种程度上可以理解为是对输入的文本进行2-gram，3-gram，4-gram的特征提取。
+
+1. 卷积层的作用是对输入数据进行特征提取  
+> 在实际的卷积特征过程中，可以设置多个filter size提取不同尺度的信息，如对文本而言，如果将filter size 设置成[2, 3, 4]，在某种程度上可以理解为是对输入的文本进行2-gram，3-gram，4-gram的特征提取。
 2. 池化层：池化层的主要目的是降维，常见的池化操作有最大值池化/平均值池化/top_k值池化/分块chunk最大池化策略等。
 
-### 循环神经网络
+### 2.循环神经网络
 
-https://blog.csdn.net/wangyangzhizhou/article/details/76278375
+详细解释可参考博客：https://blog.csdn.net/wangyangzhizhou/article/details/76278375
 
-循环神经网络的提出的主要是为了能够处理序列化的数据，卷积神经网络只能获取滑动窗口内的数据信息的相关特征，而对于类似文本这种序列话的数据具有长期依赖性，下文的内容相关信息通俗来讲都会与上文相关。循环神经网络为了处理这种相关性而诞生，在中间状态对前面的输入信息进行记忆，再依次传递到下一个神经元。
+循环神经网络的提出的主要是为了能够**处理序列化的数据**，卷积神经网络只能获取滑动窗口内的数据信息的相关特征，而对于类似文本这种序列化的数据具有长期依赖性，下文的内容相关信息通俗来讲都会与上文相关。循环神经网络为了处理这种相关性而诞生，在中间状态对前面的输入信息进行记忆，再依次传递到下一个神经元。
 
 循环神经网络的局限性：
 
@@ -43,9 +54,9 @@ https://blog.csdn.net/wangyangzhizhou/article/details/76278375
 
 （2）难以处理较长序列的数据，容易存在梯度消失或者梯度爆炸现象（当梯度小于1的时候，反向传播求幂方，会倾向于0，发生梯度消失；当梯度大于1的时候，反向传播求幂方，会倾向于无穷大，产生梯度爆炸现象）。
 
-### LSTM（长短期记忆网络）
+### 3. LSTM（长短期记忆网络）
 
-https://blog.csdn.net/wangyangzhizhou/article/details/76651116
+详细解释可参考博客：https://blog.csdn.net/wangyangzhizhou/article/details/76651116
 
 LSTM模型是循环神经网络的经典变体，通过改良循环神经网络的特性，让其能够在某种程度上减少梯度消失或者梯度爆炸的现象，且不改变其处理长期序列的能力。
 
@@ -63,9 +74,9 @@ LSTM主要通过三个门机制来决定对数据信息的保留与传递：输�
 
 (6)隐状态的输出结果为：$$h_t = o_t * tanh(c_t)$$
 
-### GRU(Gate Recurrent Unit)
+### 4. GRU(Gate Recurrent Unit)
 
-https://blog.csdn.net/wangyangzhizhou/article/details/77332582
+详细解释可参考博客：https://blog.csdn.net/wangyangzhizhou/article/details/77332582
 
 GRU 作为RNN的另外一个变体，其在某种程度上也改善了RNN梯度消失和梯度爆炸的现象，且其网络架构相较于LSTM较为简单，只有两个门控：更新门和重置门。
 
@@ -81,7 +92,7 @@ GRU 作为RNN的另外一个变体，其在某种程度上也改善了RNN梯度�
 
 
 
-### Seq2Seq(sequence to sequence)模型
+### 5. Seq2Seq(sequence to sequence)模型
 
 Seq2Seq是一种典型的encoder-decoder模型，起初被用于机器翻译模型https://arxiv.org/pdf/1409.3215.pdf，输入翻译的源句子，通过对源句子进行编码再解码的操作，最终得到目标翻译句子。https://arxiv.org/pdf/1409.0473.pdf
 
