@@ -26,17 +26,6 @@ graph LR
     E -.no.-> G
     F --> G(模型输出)
 ```
-{% highlight mermaid %}
-graph LR
-    A(模型输入)--卷积操作---B(卷积输出features)
-    B --卷积操作--- C(卷积输出features)
-    C --多层卷积--- D(卷积输出features)
-    D --池化操作--- E(池化层输出)
-    E -.yes.-> F(全连接层网络)
-    E -.no.-> G
-    F --> G(模型输出)
-{% endhighlight %}
-
 
 1. 卷积层的作用是对输入数据进行特征提取  
 > 在实际的卷积特征过程中，可以设置多个filter size提取不同尺度的信息，如对文本而言，如果将filter size 设置成[2, 3, 4]，在某种程度上可以理解为是对输入的文本进行2-gram，3-gram，4-gram的特征提取。
